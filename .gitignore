@@ -1,0 +1,12 @@
+.gradle/
+.gradle-user-home/
+.android-emulator/
+.android-user-home/
+.idea/
+.performance-python/
+build/
+**/build/
+local.properties
+web/node_modules/
+*.iml
+*.log

@@ -1,0 +1,46 @@
+{
+  "model": "app\\src\\main\\assets\\knife_classifier.tflite",
+  "test_set": "DATA\\knife_dataset\\test",
+  "threshold": 0.5,
+  "positive_class": "knife",
+  "sample_count": 108,
+  "class_counts": {
+    "knife": 100,
+    "non_knife": 8
+  },
+  "metrics": {
+    "precision": 0.9259259259259259,
+    "recall": 1.0,
+    "specificity": 0.0,
+    "balanced_accuracy": 0.5,
+    "f1_score": 0.9615384615384615,
+    "pr_auc_average_precision": 0.9509267600412972,
+    "accuracy": 0.9259259259259259,
+    "confusion_matrix": {
+      "layout": "rows=actual [knife, non_knife], columns=predicted [knife, non_knife]",
+      "values": [
+        [
+          100,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "tp": 100,
+      "fn": 0,
+      "fp": 8,
+      "tn": 0
+    }
+  },
+  "host_cpu_tflite_latency_ms": {
+    "note": "Interpreter.invoke only; excludes image decode and resize; one CPU thread; not Android-device latency",
+    "mean": 10.981471296296297,
+    "median": 10.2061,
+    "p90": 16.06504,
+    "p95": 18.012439999999994,
+    "min": 6.2603,
+    "max": 23.0991
+  }
+}

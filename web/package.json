@@ -1,0 +1,23 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node serve.js",
+    "test": "node run-ui-tests.js",
+    "test:ui": "node run-ui-tests.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "@tensorflow/tfjs": "^1.7.4",
+    "playwright": "^1.62.1"
+  },
+  "overrides": {
+    "node-fetch": "2.7.0"
+  }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeGuard AI - UI Tests</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI safety companion</p>
+        <h1>SafeGuard AI</h1>
+        <p class="subtitle">Monitor, detect, and protect from a browser.</p>
+      </div>
+      <div class="header-pill" id="status-pill">Ready</div>
+    </header>
+
+    <nav class="tab-bar" aria-label="Primary navigation">
+      <button class="tab active" data-view="dashboard">Dashboard</button>
+      <button class="tab" data-view="monitoring">Monitoring</button>
+      <button class="tab" data-view="text-analysis">Text Analysis</button>
+      <button class="tab" data-view="contacts">Contacts</button>
+      <button class="tab" data-view="history">History</button>
+      <button class="tab" data-view="settings">Settings</button>
+    </nav>
+
+    <main class="content">
+      <section id="dashboard-view" class="view active">
+        <div class="hero-card">
+          <div>
+            <p class="section-label">Live threat overview</p>
+            <h2 id="threat-title">Environment appears safe</h2>
+            <p id="threat-message">The system is standing by and monitoring your surroundings.</p>
+          </div>
+          <div class="gauge-wrap">
+            <div class="gauge" id="gauge">
+              <span id="threat-score">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="card stat-card">
+            <p class="stat-label">Monitoring</p>
+            <h3 id="monitoring-status">Inactive</h3>
+          </article>
+          <article class="card stat-card">
+            <p class="stat-label">Contacts</p>
+            <h3 id="contacts-count">0</h3>
+          </article>
+          <article class="card stat-card">
+            <p class="stat-label">Incidents</p>
+            <h3 id="incidents-count">0</h3>
+          </article>
+        </div>
+
+        <div class="action-row">
+          <button id="monitor-toggle" class="primary-btn">Start monitoring</button>
+          <button id="panic-btn" class="secondary-btn danger">Trigger SOS</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Quick access</h3>
+          </div>
+          <div class="quick-grid">
+            <button class="quick-card" data-view="contacts">Manage contacts</button>
+            <button class="quick-card" data-view="history">Review incidents</button>
+            <button class="quick-card" data-view="settings">Adjust alerts</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="monitoring-view" class="view">
+        <div class="card">
+          <div class="card-header">
+            <h3>Live monitoring</h3>
+            <span class="badge" id="monitor-badge">Standby</span>
+          </div>
+          <div class="monitoring-stage">
+            <div id="camera-shell" class="camera-placeholder">
+              <video id="camera-feed" autoplay playsinline muted></video>
+              <div id="camera-status" class="camera-status">Camera will start when monitoring begins.</div>
+            </div>
+            <div class="monitoring-details">
+              <div class="detail-pill">Emotion <strong id="emotion-pill">Neutral</strong></div>
+              <div class="detail-pill">Motion <strong id="motion-pill">Still</strong></div>
+              <div class="detail-pill">Detected <strong id="objects-pill">No objects</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacts-view" class="view">
+        <div class="card">
+          <div class="card-header">
+            <h3>Trusted contacts</h3>
+            <button id="add-contact-btn" class="primary-btn small">Add contact</button>
+          </div>
+          <div id="contacts-list" class="list"></div>
+
+          <div id="add-contact-modal" class="modal" aria-hidden="true" style="display:none;">
+            <div class="modal-content">
+              <h4>Add Emergency Contact</h4>
+              <label>Name</label>
+              <input id="add-name" type="text" placeholder="Full name" />
+              <label>Phone</label>
+              <input id="add-phone" type="tel" placeholder="+1 555-0100" />
+              <label>Role / Relationship</label>
+              <input id="add-role" type="text" placeholder="Friend, Family, etc." />
+              <div class="modal-actions">
+                <button id="save-add-contact" class="primary-btn small">Save</button>
+                <button id="delete-add-contact" class="secondary-btn small" style="background:rgba(255,77,79,0.12);display:none;">Delete</button>
+                <button id="cancel-add-contact" class="secondary-btn small">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="history-view" class="view">
+        <div class="card">
+          <div class="card-header">
+            <h3>Incident history</h3>
+          </div>
+          <div id="history-list" class="list"></div>
+        </div>
+      </section>
+
+      <section id="text-analysis-view" class="view">
+        <div class="card">
+          <div class="card-header">
+            <h3>Text emotion analysis</h3>
+          </div>
+          <p class="helper-text" style="margin-bottom:16px;">Type a message or journal entry to analyze emotional tone. This complements camera-based detection for users who prefer typing.</p>
+          <textarea id="text-input" class="text-input" rows="6" placeholder="I feel anxious about tomorrow..."></textarea>
+          <div style="display:flex;gap:12px;margin-top:12px;">
+            <button id="analyze-text-btn" class="primary-btn">Analyze Emotion</button>
+            <button id="clear-text-btn" class="secondary-btn">Clear</button>
+          </div>
+          <div id="text-analysis-result" class="text-result" style="display:none;margin-top:16px;"></div>
+        </div>
+      </section>
+
+      <section id="settings-view" class="view">
+        <div class="card">
+          <div class="card-header">
+            <h3>Alert settings</h3>
+          </div>
+          <div class="settings-list">
+            <label class="setting-row">
+              <span>SMS alerts</span>
+              <input type="checkbox" id="sms-toggle" />
+            </label>
+            <label class="setting-row">
+              <span>Push notifications</span>
+              <input type="checkbox" id="push-toggle" />
+            </label>
+            <label class="setting-row">
+              <span>Email-style escalation</span>
+              <input type="checkbox" id="email-toggle" />
+            </label>
+            <label class="setting-row">
+              <span>Auto alert threshold</span>
+              <input type="range" id="threshold-range" min="40" max="100" step="5" />
+            </label>
+            <p class="helper-text" id="threshold-value">Threshold: 70%</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Load dependencies -->
+  <script src="/node_modules/@tensorflow/tfjs/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <script src="/node_modules/@tensorflow-models/coco-ssd/dist/coco-ssd.min.js"></script>
+  
+  <!-- Load app logic -->
+  <script src="app.js"></script>
+  
+  <!-- Load UI tests -->
+  <script src="ui-tests.js"></script>
+  
+  <!-- Test runner UI -->
+  <div id="test-runner" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:white;padding:15px;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.2);font-family:monospace;font-size:12px;max-width:400px;">
+    <h3 style="margin:0 0 10px;color:#333;">🧪 UI Test Runner</h3>
+    <button id="run-tests-btn" style="width:100%;padding:10px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;font-weight:bold;">Run All UI Tests</button>
+    <div id="test-output" style="margin-top:10px;padding:10px;background:#f5f5f5;border-radius:4px;max-height:300px;overflow:auto;font-size:11px;display:none;"></div>
+  </div>
+
+  <script>
+    // Override console.log to capture output
+    const originalLog = console.log;
+    const originalError = console.error;
+    const outputDiv = document.getElementById('test-output');
+    
+    function appendOutput(msg, isError = false) {
+      const line = document.createElement('div');
+      line.style.color = isError ? '#dc3545' : '#333';
+      line.style.margin = '2px 0';
+      line.textContent = msg;
+      outputDiv.appendChild(line);
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+    
+    console.log = (...args) => {
+      originalLog.apply(console, args);
+      appendOutput(args.join(' '));
+    };
+    
+    console.error = (...args) => {
+      originalError.apply(console, args);
+      appendOutput(args.join(' '), true);
+    };
+    
+    document.getElementById('run-tests-btn').addEventListener('click', () => {
+      outputDiv.style.display = 'block';
+      outputDiv.innerHTML = '';
+      UI_TESTS.passed = 0;
+      UI_TESTS.failed = 0;
+      runAllUITests();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+{
+  "model_name": "ResNet50_conv4_grid_L2_LinearProbe",
+  "version": 2,
+  "timestamp": "2026-07-27 06:30:23",
+  "framework": "TensorFlow/Keras + scikit-learn linear head",
+  "tensorflow_version": "2.21.0",
+  "image_size": [
+    224,
+    224
+  ],
+  "num_classes": 8,
+  "emotion_labels": [
+    "Anger",
+    "Contempt",
+    "Disgust",
+    "Fear",
+    "Happy",
+    "Neutral",
+    "Sad",
+    "Surprised"
+  ],
+  "app_emotion_map": {
+    "Anger": "Angry",
+    "Contempt": "Disgust",
+    "Disgust": "Disgust",
+    "Fear": "Fear",
+    "Happy": "Happy",
+    "Neutral": "Neutral",
+    "Sad": "Sad",
+    "Surprised": "Surprise"
+  },
+  "output_is_logits": true,
+  "augmentation_used": false,
+  "backbone_layer": "conv4_block6_out",
+  "chosen_C": 10.0,
+  "validation_methodology": "Hyper-parameter C selected with GroupKFold(5) grouped by subject over the 15 training subjects only. The 4 test subjects were evaluated exactly once. LOSO over all 19 subjects is reported as a second, more stable estimate; the configuration was fixed before LOSO ran, and no per-fold tuning occurs.",
+  "dataset": {
+    "total_images": 152,
+    "num_subjects": 19,
+    "train_images": 120,
+    "test_images": 32,
+    "train_subjects": [
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "test_subjects": [
+      0,
+      1,
+      5,
+      11
+    ],
+    "class_distribution": {
+      "Anger": 19,
+      "Contempt": 19,
+      "Disgust": 19,
+      "Fear": 19,
+      "Happy": 19,
+      "Neutral": 19,
+      "Sad": 19,
+      "Surprised": 19
+    }
+  },
+  "evaluation": {
+    "cv_accuracy_train_subjects": 0.375,
+    "test_accuracy": 0.3125,
+    "test_accuracy_tflite": 0.3125,
+    "test_accuracy_percent": 31.25,
+    "macro_precision": 0.27361111111111114,
+    "macro_recall": 0.3125,
+    "macro_f1": 0.27695360195360197,
+    "weighted_precision": 0.27361111111111114,
+    "weighted_recall": 0.3125,
+    "weighted_f1": 0.27695360195360197,
+    "loso_accuracy": 0.40789473684210525,
+    "loso_macro_f1": 0.3970613143631436,
+    "loso_macro_precision": 0.4078947368421052,
+    "loso_macro_recall": 0.3957389179448003,
+    "loso_confusion_matrix": [
+      [
+        9,
+        0,
+        2,
+        1,
+        2,
+        3,
+        0,
+        2
+      ],
+      [
+        2,
+        3,
+        3,
+        2,
+        2,
+        2,
+        4,
+        1
+      ],
+      [
+        2,
+        2,
+        11,
+        0,
+        0,
+        2,
+        2,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        8,
+        0,
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        13,
+        0,
+        2,
+        1
+      ],
+      [
+        2,
+        2,
+        2,
+        2,
+        0,
+        8,
+        1,
+        2
+      ],
+      [
+        3,
+        2,
+        4,
+        1,
+        0,
+        4,
+        2,
+        3
+      ],
+      [
+        2,
+        0,
+        1,
+        7,
+        0,
+        1,
+        0,
+        8
+      ]
+    ],
+    "loso_per_class_recall": {
+      "Anger": 0.47368421052631576,
+      "Contempt": 0.15789473684210525,
+      "Disgust": 0.5789473684210527,
+      "Fear": 0.42105263157894735,
+      "Happy": 0.6842105263157895,
+      "Neutral": 0.42105263157894735,
+      "Sad": 0.10526315789473684,
+      "Surprised": 0.42105263157894735
+    },
+    "per_class": {
+      "Anger": {
+        "precision": 0.5,
+        "recall": 0.25,
+        "f1_score": 0.3333333333333333,
+        "support": 4
+      },
+      "Contempt": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "support": 4
+      },
+      "Disgust": {
+        "precision": 0.2222222222222222,
+        "recall": 0.5,
+        "f1_score": 0.3076923076923077,
+        "support": 4
+      },
+      "Fear": {
+        "precision": 0.3333333333333333,
+        "recall": 0.25,
+        "f1_score": 0.2857142857142857,
+        "support": 4
+      },
+      "Happy": {
+        "precision": 0.6,
+        "recall": 0.75,
+        "f1_score": 0.6666666666666666,
+        "support": 4
+      },
+      "Neutral": {
+        "precision": 0.2,
+        "recall": 0.25,
+        "f1_score": 0.2222222222222222,
+        "support": 4
+      },
+      "Sad": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "support": 4
+      },
+      "Surprised": {
+        "precision": 0.3333333333333333,
+        "recall": 0.5,
+        "f1_score": 0.4,
+        "support": 4
+      }
+    },
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        2
+      ]
+    ],
+    "classification_report": {
+      "Anger": {
+        "precision": 0.5,
+        "recall": 0.25,
+        "f1-score": 0.3333333333333333,
+        "support": 4.0
+      },
+      "Contempt": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 4.0
+      },
+      "Disgust": {
+        "precision": 0.2222222222222222,
+        "recall": 0.5,
+        "f1-score": 0.3076923076923077,
+        "support": 4.0
+      },
+      "Fear": {
+        "precision": 0.3333333333333333,
+        "recall": 0.25,
+        "f1-score": 0.2857142857142857,
+        "support": 4.0
+      },
+      "Happy": {
+        "precision": 0.6,
+        "recall": 0.75,
+        "f1-score": 0.6666666666666666,
+        "support": 4.0
+      },
+      "Neutral": {
+        "precision": 0.2,
+        "recall": 0.25,
+        "f1-score": 0.2222222222222222,
+        "support": 4.0
+      },
+      "Sad": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 4.0
+      },
+      "Surprised": {
+        "precision": 0.3333333333333333,
+        "recall": 0.5,
+        "f1-score": 0.4,
+        "support": 4.0
+      },
+      "accuracy": 0.3125,
+      "macro avg": {
+        "precision": 0.27361111111111114,
+        "recall": 0.3125,
+        "f1-score": 0.27695360195360197,
+        "support": 32.0
+      },
+      "weighted avg": {
+        "precision": 0.27361111111111114,
+        "recall": 0.3125,
+        "f1-score": 0.27695360195360197,
+        "support": 32.0
+      }
+    }
+  },
+  "exports": {
+    "tflite_model": "C:\\Users\\LED 224\\Desktop\\SMS\\Safety_Monitoring_system\\app\\src\\main\\assets\\emotion_classifier.tflite",
+    "tflite_size_kb": 16791.3
+  }
+}
